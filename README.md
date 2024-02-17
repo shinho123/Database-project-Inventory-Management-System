@@ -7,19 +7,19 @@
 
 역할 : PL/SQL 코드 작업, 디버깅, 모델 구현
 
-# 물품 재고 관리 시스템의 필요성
+## Ⅰ. 물품 재고 관리 시스템의 필요성
 
-## 기업 및 매출의 관점
+### 기업 및 매출의 관점
 * 효율적인 재고 관리를 통한 재고 투자와 재고 비용의 절감
 * 운전자금의 원활화 → 품절 방지를 통한 서비스율 향상
 * 매출기화의 창출
 * 조업의 안정화
 
-## 고객관리의 관점
+### 고객관리의 관점
 * 필요한 시점과 장소에 재고가 부족할 경우 고객들의 욕구 불충족
 * 재고의 보관을 제대로 수행하지 않을 경우 재고 보관 비용 부패·도난·손상의 위험 존재
 
-# 개발 목표
+## 개발 목표
 
 ![image](https://github.com/shinho123/Database-project/assets/105840783/74a829a2-d37b-4164-85d5-46b120f69645)
 
@@ -27,26 +27,26 @@
 * 재고의 가시성 : 보유중인 재고와 관련된 재고를 한눈에 파악하기 쉽도록 설계
 * 재고의 주기성 : 보관된 물품 정보들은 주기적으로 갱신되어 항상 최신화를 유지할 수 있도록 설계
 
-# 주요 기능
+## 주요 기능
 
 ![image](https://github.com/shinho123/Database-project/assets/105840783/c1327e47-1470-469d-9c3e-ee00e592a16f)
 
 
-# 설계 내용
+## 설계 내용
 
-## 고객 관리
+### 고객 관리
 
 ![image](https://github.com/shinho123/Database-project/assets/105840783/1ffb775f-31c4-466a-ae56-ff1f28902184)
 
 * 고객의 id, pw와 기본 정보(이름, 주소, 주민등록번호)를 담고 있으며, 고객의 id는 사람마다 고유해야 하므로 primary key로 지정함
 
-## 물품 관리
+### 물품 관리
 
 ![image](https://github.com/shinho123/Database-project/assets/105840783/40eb2c66-4b69-4439-8d2b-78e0fd3db6c5)
 
 * 고객이 주문한 물품(물품번호, 물품명, 단가(가격), 재고량)의 정보를 담고 있다. 위와 같이 중복이 되지 않도록 고유의 물품번호를 가지고 있어야 하므로 물품번호를 primary key로 지정함
 
-## 물품-{고객, 제조회사}
+### 물품-{고객, 제조회사}
 
 ![image](https://github.com/shinho123/Database-project/assets/105840783/e8e54b92-df37-4fcc-897b-8f9845a0fd7d)
 
@@ -54,31 +54,31 @@
 * 물품-제조회사 : 물품은 한 곳의 회사에서 제조된다.(1:1) 또한 한 제조회사에서 여러 개의 물품을 제조하므로 1:M의 사상 수를 가짐
 
 
-# ERD(Entity Relational Diagram)
+### ERD(Entity Relational Diagram)
 
 ![image](https://github.com/shinho123/Database-project/assets/105840783/8bbf19a2-de3b-45cc-94fe-8e3b547c4131)
 
-# 프로그램 실행 및 결과
+## Ⅱ. 프로그램 실행 및 결과
 
-## 자료 등록
+### 자료 등록
 
-### 고객 정보 등록(Custom_info) (1/4)
+#### 고객 정보 등록(Custom_info) (1/4)
 
 ![image](https://github.com/shinho123/Database-project/assets/105840783/323fe733-fda5-4837-9132-6b8040586c4f)
 
-### 납품 회사 정보 등록(Company_info) (2/4)
+#### 납품 회사 정보 등록(Company_info) (2/4)
 
 ![image](https://github.com/shinho123/Database-project/assets/105840783/05a47c59-6b3d-447a-bb85-002c2b0eada8)
 
-### 물품 정보 등록(Product_info) (3/4)
+#### 물품 정보 등록(Product_info) (3/4)
 
 ![image](https://github.com/shinho123/Database-project/assets/105840783/49c4a687-1794-4829-ab4a-2593d4fe0f40)
 
-### 물품 구매 정보 등록(Product_purchase_info) (4/4)
+#### 물품 구매 정보 등록(Product_purchase_info) (4/4)
 
 ![image](https://github.com/shinho123/Database-project/assets/105840783/3efa4925-dab5-48e0-9f56-9714f160de57)
 
-## 자료 업데이트(Update) : 패스워드 변경, 주문(취소) 시 보유 재고량 변경
+### 자료 업데이트(Update) : 패스워드 변경, 주문(취소) 시 보유 재고량 변경
 
 ### 패스워드 변경
 
@@ -93,7 +93,7 @@
 
 ### 물품 주문 시 보유 재고량 변화 
 
-### 물품 재고량 변화 전 (1/2)
+#### 물품 재고량 변화 전 (1/2)
 ![image](https://github.com/shinho123/Database-project/assets/105840783/904f2394-b46b-46de-a656-9bc2ca33620a)
 
 
@@ -101,7 +101,7 @@
 
 ![image](https://github.com/shinho123/Database-project/assets/105840783/ea3ba907-21d2-4a17-862a-c4d9ce5a69b6)
 
-### 물품 재고량 변화 후 (2/2)
+#### 물품 재고량 변화 후 (2/2)
 
 ![image](https://github.com/shinho123/Database-project/assets/105840783/a346acca-f175-4fcb-8f3a-cd61b58ae45f)
 
@@ -140,6 +140,24 @@
 * 프로시저 설계 시 커서(검색 결과가 복수 행일 경우 복수 행의 결과를 행 단위로 처리해야함)를 함께 사용
 * 자료 검색 프로시저 형식 : exec search_date('2021-11-28', '2021-12-04'); → 2021년 11월 28일부터 2021년 12월 04일까지의 데이터를 검색
 
+#### 검색 결과(2021.11.28 ~ 2021.12.04)
 ![image](https://github.com/shinho123/Database-project/assets/105840783/9ae70148-e973-4ddc-9845-24673f41f84a)
 
+### View를 통한 정보 확인 - 물품 구매 정보 통계 뷰
 
+![image](https://github.com/shinho123/Database-project/assets/105840783/d13428d1-9f52-4c84-829a-7b5120f36312)
+
+* 물품 구매 정보 테이블을 통계 산출하여 고객들의 총 구매 수량, 가격, 최대 구매 가격, 최소 구매 가격, 사용자 별 평균 지출 등을 확인하는 뷰를 생성
+
+## Ⅲ. 결론
+
+### 성과 및 기대효과
+
+* 비용절감(Low Cost) : 재고를 관리하면서 발생하는 관리 비용이나 물품의 주문, 구매, 조달과 관련하여 드는 재고 비용의 절감효과를 불러옴
+* 생산성 향상(Increase Productivity) : 작업 인원의 효율적 분배와 작업 동선 확보를 통해 인건비 절감의 효과를 불러옴
+* AI(Artificial Intelligence)와 결합한 미래의 재고관리 : 기술 및 능력 있는 소비자들이 기업들의 재고 관리 방식을 변화시키고 있는 추세이며, 이들은 AI와 물류관리시스템을 융합하여 미래에는 물류 비용과 성능의 이상 현상이 발생하기 전에 미리 예측하며, 자동화가 상당한 규모로 발전가능
+* 재고 정확도(Inventory Accuracy) : 불필요한 재고 구매 억제 및 수.발주 업무의 필수 요소이며 전상상의 물류와 실물 숫자가 일치하지 않아 발생할 수 있는 문제점도 예방가능
+
+### 보완사항
+
+* 스케줄러를 활용하여 특정 월 또는 년을 지정하여 월/년 단위 통계를 자동으로 산출 -> 사용자별 구매 통계량을 한눈에 파악할 수 있음 
