@@ -57,3 +57,89 @@
 # ERD(Entity Relational Diagram)
 
 ![image](https://github.com/shinho123/Database-project/assets/105840783/8bbf19a2-de3b-45cc-94fe-8e3b547c4131)
+
+# 프로그램 실행 및 결과
+
+## 자료 등록
+
+### 고객 정보 등록(Custom_info) (1/4)
+
+![image](https://github.com/shinho123/Database-project/assets/105840783/323fe733-fda5-4837-9132-6b8040586c4f)
+
+### 납품 회사 정보 등록(Company_info) (2/4)
+
+![image](https://github.com/shinho123/Database-project/assets/105840783/05a47c59-6b3d-447a-bb85-002c2b0eada8)
+
+### 물품 정보 등록(Product_info) (3/4)
+
+![image](https://github.com/shinho123/Database-project/assets/105840783/49c4a687-1794-4829-ab4a-2593d4fe0f40)
+
+### 물품 구매 정보 등록(Product_purchase_info) (4/4)
+
+![image](https://github.com/shinho123/Database-project/assets/105840783/3efa4925-dab5-48e0-9f56-9714f160de57)
+
+## 자료 업데이트(Update) : 패스워드 변경, 주문(취소) 시 보유 재고량 변경
+
+### 패스워드 변경
+
+![image](https://github.com/shinho123/Database-project/assets/105840783/be17f498-34da-4581-9abb-797d04617aba)
+
+* 현재 등록되어 있는 패스워드를 다른 패스워드로 변경할 경우 고객 정보(Custom_info)의 패스워드를 변경된 패스워드로 변경함
+* 패스워드 변경 프로시저 형식 : exec ch_ps('사용자 id', '사용자 pw', '변경할 pw')
+* 패스워드 변경 프로시저는 다음 3가지 원칙을 기반으로 설계하였으며, 하나라도 만족하지 않을 시 변경되지 않음)
+  + 프로시저의 매개변수로 현재 등록된 아이디와 비밀번호를 입력하고 마지막 매개변수로 변경할 비밀번호를 입력한다.
+  + 변경할 비밀번호가 현재 데이터베이스에 등록된 다른 비밀번호와 중복되지 않아야 한다.
+  + 현재 비밀번호와 변경할 비밀번호가 중복되지 않아야 한다.
+
+### 물품 주문 시 보유 재고량 변화 
+
+### 물품 재고량 변화 전 (1/2)
+![image](https://github.com/shinho123/Database-project/assets/105840783/904f2394-b46b-46de-a656-9bc2ca33620a)
+
+
+* 물품 구입 정보 입력 프로시저 형식 : exec product_purchase_info_input('사용자 id', '물품번호', '구매날짜', '구매수량')
+
+![image](https://github.com/shinho123/Database-project/assets/105840783/ea3ba907-21d2-4a17-862a-c4d9ce5a69b6)
+
+### 물품 재고량 변화 후 (2/2)
+
+![image](https://github.com/shinho123/Database-project/assets/105840783/a346acca-f175-4fcb-8f3a-cd61b58ae45f)
+
+### 주문 취소 시 취소된 정보 삭제 및 보유 재고량 반환
+
+![image](https://github.com/shinho123/Database-project/assets/105840783/8aa4ef52-5c09-42bc-aa68-6229256152c3)
+
+* 주문을 취소하게 되면 물품 구매 정보(Product_purchase_info) 테이블에 취소 정보를 담고 있는 행을 삭제하고, 물품 정보(Product_info) 테이블에서 각 보유 재고량이 취소 수량만큼 증가함
+* 주문취소 프로지저 형식 : exec delete_data('사용자 id', '물품번호', '주문수량')
+
+#### 주문 취소 전 물품 정보 테이블(Product_info) (1/2)
+
+![image](https://github.com/shinho123/Database-project/assets/105840783/9e5d9821-34ea-4255-a38f-d9ffbe546c69)
+
+* exec delete_data('mvs021', 'A001', 3);
+  + 아이디 : mvs021
+  + 물품 번호 : A001(shirt)
+  + 취소 수량 : 3개
+  + 총 가격 : 39,000원
+      
+* exec delete_data('mvs021', 'E001', 2);
+  + 아이디 : mvs021
+  + 물품 번호 : E001(jeans)
+  + 취소 수량 : 2개
+  + 총 가격 : 24,000원
+
+#### 주문 취소 후 물품 정보 테이블(Product_info) (2/2)
+
+![image](https://github.com/shinho123/Database-project/assets/105840783/8e3207e5-3944-413b-b01b-7cdf3443a209)
+
+### 자료 검색
+
+![image](https://github.com/shinho123/Database-project/assets/105840783/444afc96-abb7-41df-8fb8-2bc70d91ce86)
+
+* 지정된 날짜 사이의 데이터 검색
+* 프로시저 설계 시 커서(검색 결과가 복수 행일 경우 복수 행의 결과를 행 단위로 처리해야함)를 함께 사용
+* 자료 검색 프로시저 형식 : exec search_date('2021-11-28', '2021-12-04'); → 2021년 11월 28일부터 2021년 12월 04일까지의 데이터를 검색
+
+![image](https://github.com/shinho123/Database-project/assets/105840783/9ae70148-e973-4ddc-9845-24673f41f84a)
+
+
