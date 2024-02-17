@@ -1,0 +1,61 @@
+create table custom_info
+(
+    cus_id varchar2(20) not null,
+    cus_pw varchar2(20) not null,
+    cus_name varchar2(20) not null,
+    cus_adress varchar2(100),
+    cus_num varchar2(13) not null,
+    constraint custom_info_pk primary key(cus_id)
+);
+
+
+create table company_info
+(
+    comp_name varchar2(50) not null,
+    comp_num number not null,
+    comp_addr varchar2(100),
+    comp_tel number,
+    constraint company_info_pk primary key(comp_num)
+);
+
+create table product_info
+(
+    prod_name varchar2(50) not null,
+    prod_num varchar2(20) not null,
+    prod_price number,
+    comp_num number,
+    prod_date date,
+    prod_quan number,
+    constraint product_info_pk primary key(prod_num),
+    constraint product_info_fk foreign key(comp_num) references company_info(comp_num)
+);
+
+create table product_purchase_info
+(
+    cus_id varchar2(20) not null,
+    prod_num varchar2(20) not null,
+    purc_date date not null,
+    purc_quan varchar2(25),
+    t_price varchar2(25),
+    constraint product_purchase_info_pk primary key(purc_date),
+    constraint product_purchase_info_fk1 foreign key(cus_id) references custom_info(cus_id),
+    constraint product_purchase_info_fk2 foreign key(prod_num) references product_info(prod_num)
+);
+
+
+----
+고객정보 입력 프로시저(실행 exec custom_input('shk240', 'dongseo123', '김신호', '백양대로 208번길 88', '9704301114510');)
+
+create or replace procedure custom_input
+(
+    cus_id varchar,
+    cus_pw in varchar2,
+    cus_name in varchar2,
+    cus_adress in varchar2,
+    cus_num in varchar2
+)
+is
+begin
+    insert into custom_info 
+    values (cus_id, cus_pw, cus_name, cus_adress, cus_num);
+end custom_input;
